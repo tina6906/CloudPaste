@@ -12,6 +12,4 @@ id = "temporary-id-12345"
 binding = "UPLOAD_STATUS"
 id = "temporary-id-67890"
 
-[[r2_buckets]]
-bucket_name = "cloudpaste-files"
-binding = "FILE_STORE"
+
