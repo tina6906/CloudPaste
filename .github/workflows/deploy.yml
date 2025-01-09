@@ -75,26 +75,7 @@ jobs:
           fi
           echo "UPLOAD_STATUS_ID=$KV_ID" >> $GITHUB_ENV
           
-      - name: Check and Create R2 Bucket
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
-        run: |
-          R2_BUCKET="cloudpaste-files"
-          R2_BINDING="FILE_STORE"
-          echo "Checking for R2 bucket: $R2_BUCKET"
-          
-          # List buckets and check if our bucket exists
-          BUCKET_LIST=$(wrangler r2 bucket list)
-          BUCKET_EXISTS=$(echo "$BUCKET_LIST" | grep -w "$R2_BUCKET" || true)
-          
-          if [ -z "$BUCKET_EXISTS" ]; then
-              echo "R2 bucket $R2_BUCKET does not exist. Creating..."
-              CREATE_OUTPUT=$(wrangler r2 bucket create "$R2_BUCKET" --location apac)
-              echo "R2 bucket $R2_BUCKET created successfully"
-          else
-              echo "R2 bucket $R2_BUCKET already exists"
-          fi
+      
 
       - name: Update wrangler.toml
         run: |
